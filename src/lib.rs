@@ -28,6 +28,6 @@ mod tests {
     use super::*;
     #[test]
     fn empty() {
-        assert_eq!(flatten(std::iter::empty::<()>()).count(), 0)
+        assert_eq!(flatten(std::iter::empty::<Vec<()>>()).count(), 0)
     }
 }
