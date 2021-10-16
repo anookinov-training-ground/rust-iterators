@@ -1,4 +1,4 @@
-pub fn flatter<I>(iter: I) -> Flatten<I> {
+pub fn flatten<I>(iter: I) -> Flatten<I> {
     Flatten::new(iter)
 }
 
@@ -20,5 +20,14 @@ where
     type Item = <O::Item as IntoIterator>::Item;
     fn next(&mut self) -> Option<Self::Item> {
         self.outer.next().and_then(|inner| inner.into_iter().next())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn empty() {
+        assert_eq!(flatten(std::iter::empty::<()>()).count(), 0)
     }
 }
