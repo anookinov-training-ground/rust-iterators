@@ -38,7 +38,8 @@ where
     type Item = <O::Item as IntoIterator>::Item;
     fn next(&mut self) -> Option<Self::Item> {
         loop {
-            if let Some(ref mut front_iter) = self.front_iter {
+            // as_mut: Option<T> -> Option<&mut T>
+            if let Some(front_iter) = self.front_iter.as_mut() {
                 if let Some(i) = front_iter.next() {
                     return Some(i);
                 }
